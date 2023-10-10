@@ -7,7 +7,6 @@ export async function GET(_req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const data = await req.json();
-  console.log(data)
 
   const todo = await prisma.todo.create({
     data: { ...data, isCompleted: false },

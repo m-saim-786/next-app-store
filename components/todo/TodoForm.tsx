@@ -6,8 +6,8 @@ const TodoForm = ({ addTodo }: { addTodo: (title: string) => Promise<void> }) =>
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    if (title !== "")
-      addTodo(title).catch((err) => console.error(err));
+    if (title.trim() !== "")
+      addTodo(title.trim()).catch((err) => console.error(err));
 
     setTitle("");
   };
@@ -19,7 +19,7 @@ const TodoForm = ({ addTodo }: { addTodo: (title: string) => Promise<void> }) =>
           <input
             type="text"
             className="w-full p-2 rounded-md border-2"
-            onChange={(e) => setTitle(e.target.value.trim())}
+            onChange={(e) => setTitle(e.target.value)}
             value={title}
             required={true}
             placeholder="Add Todo..."
