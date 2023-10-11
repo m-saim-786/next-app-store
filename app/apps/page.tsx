@@ -11,6 +11,9 @@ export default function Apps() {
         <li>
           <Link href={"/apps/stopwatch"}>Stopwatch</Link>
         </li>
+        <li>
+          <Link href={"/apps/editor"}>Editor</Link>
+        </li>
       </ul>
     </main>
   );
