@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const StopwatchForm = ({ onSubmit }: { onSubmit: (value: number) => void }) => {
+const TimerForm = ({ onSubmit }: { onSubmit: (value: number) => void }) => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
@@ -43,4 +43,4 @@ const StopwatchForm = ({ onSubmit }: { onSubmit: (value: number) => void }) => {
   );
 };
 
-export default StopwatchForm;
+export default TimerForm;

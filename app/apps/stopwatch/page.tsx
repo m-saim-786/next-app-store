@@ -1,10 +1,11 @@
+import Container from "@/components/shared/Container";
 import Timer from "@/components/stopwatch/Timer";
 
-export default async function StopWatch() {
+export default async function Page() {
   return (
-    <main className="mx-auto w-[40rem]">
+    <Container>
       <h1 className="text-center font-semibold text-2xl">Stopwatch</h1>
       <Timer />
-    </main>
+    </Container>
   );
 }

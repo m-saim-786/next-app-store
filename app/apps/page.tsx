@@ -1,19 +1,24 @@
 import Link from "next/link";
 
-export default function Apps() {
+export default function Page() {
+
+  const appRoutes = [
+    { href: "/apps/todo", label: "Todo App" },
+    { href: "/apps/stopwatch", label: "Stopwatch" },
+    { href: "/apps/editor", label: "Editor" },
+    { href: "/apps/chessTimer", label: "Chess Timer" },
+    { href: "/apps/timezoneConvertor", label: "Timezone Convertor" },
+];
+
   return (
     <main>
       <h1>All Apps</h1>
       <ul>
-        <li>
-          <Link href={"/apps/todo"}>Todo App</Link>
-        </li>
-        <li>
-          <Link href={"/apps/stopwatch"}>Stopwatch</Link>
-        </li>
-        <li>
-          <Link href={"/apps/editor"}>Editor</Link>
-        </li>
+        {appRoutes.map((route) => (
+          <li key={route.label}>
+            <Link href={route.href}>{route.label}</Link>
+          </li>
+        ))}
       </ul>
     </main>
   );
