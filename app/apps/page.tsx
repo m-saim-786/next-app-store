@@ -5,7 +5,6 @@ export default function Page() {
   const appRoutes = [
     { href: "/apps/todo", label: "Todo App" },
     { href: "/apps/stopwatch", label: "Stopwatch" },
-    { href: "/apps/editor", label: "Editor" },
     { href: "/apps/chessTimer", label: "Chess Timer" },
     { href: "/apps/timezoneConvertor", label: "Timezone Convertor" },
 ];

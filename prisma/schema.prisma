@@ -6,17 +6,32 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model Todo {
-  id Int @id @default(autoincrement())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   title String
   isCompleted Boolean
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  storyId String @db.ObjectId
+  story Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
   @@index([title])
+}
+
+model Story {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+
+  todos Todo[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([name])
 }

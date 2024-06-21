@@ -1,13 +1,13 @@
 "use client";
 import { useState } from "react";
 
-const TodoForm = ({ addTodo }: { addTodo: (title: string) => Promise<void> }) => {
+const InputForm = ({ onSubmit }: { onSubmit: (title: string) => Promise<void> }) => {
   const [title, setTitle] = useState("");
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     if (title.trim() !== "")
-      addTodo(title.trim()).catch((err) => console.error(err));
+      onSubmit(title.trim()).catch((err) => console.error(err));
 
     setTitle("");
   };
@@ -22,7 +22,7 @@ const TodoForm = ({ addTodo }: { addTodo: (title: string) => Promise<void> }) =>
             onChange={(e) => setTitle(e.target.value)}
             value={title}
             required={true}
-            placeholder="Add Todo..."
+            placeholder="Enter title ..."
           />
           <input
             type="submit"
@@ -35,4 +35,4 @@ const TodoForm = ({ addTodo }: { addTodo: (title: string) => Promise<void> }) =>
   );
 };
 
-export default TodoForm;
+export default InputForm;

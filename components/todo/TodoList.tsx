@@ -2,9 +2,9 @@
 import { Todo } from "@prisma/client";
 import TodoItem from "./TodoItem";
 import { useState } from "react";
-import TodoForm from "./TodoForm";
+import InputForm from "./InputForm";
 
-const TodoList = ({ todoList }: { todoList: Todo[] }) => {
+const TodoList = ({ todoList, storyId }: { todoList: Todo[], storyId: string }) => {
   const [list, setList] = useState<Todo[]>(todoList);
 
   const displayTodoList = () =>
@@ -17,9 +17,9 @@ const TodoList = ({ todoList }: { todoList: Todo[] }) => {
       />
     ));
 
-  const removeTodo = async (id: number) => {
+  const removeTodo = async (id: string) => {
     try {
-      const { todo }: { todo: Todo } = await fetch(`/api/todo/${id}`, {
+      const { todo }: { todo: Todo } = await fetch(`/api/todos/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const TodoList = ({ todoList }: { todoList: Todo[] }) => {
     }
   };
 
-  const toggleComplete = async (id: number, completed: boolean) => {
+  const toggleComplete = async (id: string, completed: boolean) => {
     try {
       setList((prev) =>
         prev.map((item) => {
@@ -41,7 +41,7 @@ const TodoList = ({ todoList }: { todoList: Todo[] }) => {
         })
       );
 
-      await fetch(`/api/todo/${id}`, {
+      await fetch(`/api/todos/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ const TodoList = ({ todoList }: { todoList: Todo[] }) => {
     try {
       setList([]);
 
-      await fetch(`/api/todo`, {
+      await fetch(`/api/todos?storyId=${storyId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -80,13 +80,14 @@ const TodoList = ({ todoList }: { todoList: Todo[] }) => {
 
   const addTodo = async (title: string) => {
     try {
-      const { todo }: { todo: Todo } = await fetch(`/api/todo`, {
+      const { todo }: { todo: Todo } = await fetch(`/api/todos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           title,
+          storyId,
         }),
       }).then((res) => res.json());
 
@@ -98,7 +99,7 @@ const TodoList = ({ todoList }: { todoList: Todo[] }) => {
 
   return (
     <>
-      <TodoForm addTodo={addTodo} />
+      <InputForm onSubmit={addTodo} />
       <div className="flex justify-between">
         <h3 className="text-2xl">List</h3>
         <button

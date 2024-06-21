@@ -1,5 +1,5 @@
 type TodoItem = {
-  id: number;
+  id: string;
   title: string;
   isCompleted: boolean;
 };
@@ -10,8 +10,8 @@ const TodoItem = ({
   onDelete,
 }: {
   item: TodoItem;
-  onChecked: (id: number, completed: boolean) => Promise<void>;
-  onDelete: (id: number) => Promise<void>;
+  onChecked: (id: string, completed: boolean) => Promise<void>;
+  onDelete: (id: string) => Promise<void>;
 }) => {
   return (
     <>

@@ -1,12 +1,14 @@
-import TodoList from "@/components/todo/TodoList";
+import Stories from "@/components/todo/Stories";
+import { prisma } from "@/lib/prisma";
 
 export default async function Page() {
-  const { todos } = await fetch(`${process.env.BASE_URL}/api/todo`,  { cache: 'no-cache' }).then(res => res.json());
+  // const { stories } = await fetch(`${process.env.BASE_URL}/api/stories`,  { cache: 'no-cache' }).then(res => res.json());
 
+  const stories = await prisma.story.findMany();
   return (
     <main className="mx-auto w-1/2">
-      <h1 className="text-3xl">Todo App</h1>
-      <TodoList todoList={todos} />
+      <h1 className="text-3xl">Stories</h1>
+      <Stories stories={stories} />
     </main>
   );
 }
